@@ -1,0 +1,29 @@
+<odoo>
+    <data noupdate="0">
+        <record id="iti_certificates_category" model="ir.module.category">
+            <field name="name">CERTIFICATES</field>
+        </record>
+        <record id="iti_user_certificates_group" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="iti_certificates_category"/>
+        </record>
+        <record id="iti_super_user_certificates_group" model="res.groups">
+            <field name="name">Superuser</field>
+            <field name="category_id" ref="iti_certificates_category"/>
+        </record>
+
+        <record id="iti_user_certificates_manipulate" model="ir.rule">
+            <field name="name">Certificates manipulate user</field>
+            <field name="model_id" ref="model_iti_certificate_certificates"/>
+            <field name="groups" eval="[(4, ref('iti_user_certificates_group'))]"/>
+            <field name="domain_force">[('create_uid','=',user.id)]</field>
+        </record>
+
+        <record id="iti_superuser_certificates_manipulate" model="ir.rule">
+            <field name="name">Certificates manipulate superuser</field>
+            <field name="model_id" ref="model_iti_certificate_certificates"/>
+            <field name="groups" eval="[(4, ref('iti_super_user_certificates_group'))]"/>
+            <field name="domain_force">[]</field>
+        </record>
+    </data>
+</odoo>
