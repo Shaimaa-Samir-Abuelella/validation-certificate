@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+        <record id="certificates_action" model="ir.actions.act_window">
+            <field name="name">Certifcate</field>
+            <field name="res_model">iti.certificate.certificates</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="certificates_type_action" model="ir.actions.act_window">
+            <field name="name">Certifcate Types</field>
+            <field name="res_model">iti.certificate.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="traffic_departments_action" model="ir.actions.act_window">
+            <field name="name">Traffic departments</field>
+            <field name="res_model">iti.certificate.trafficdepartment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="customers_action" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="iti_certificates_form_view" model="ir.ui.view">
+            <field name="name">Iti certificates form view</field>
+            <field name="model">iti.certificate.certificates</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <header>
+                            <button name="print_report" type="object" string="Print Certificate"/>
+                            <button name="allow_reprint" type="object" string="Allow reprint" groups="certificates.iti_super_user_certificates_group"/>
+                        </header>
+                    </group>>
+                    <group>
+                        <group>
+                            <field name="vehicle_type"/>
+                            <field name="certificate_types"/>
+                            <field name="traffic_department"/>
+                            <field name="customer"/>
+                            <field name="price"/>
+                        </group>
+                        <group>
+                            <field name="car_brand"/>
+                            <field name="motor_number"/>
+                            <field name="chassis_number"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string = "Log history">
+                            <group>
+                                <field name="log_history_ids">
+                                    <tree>
+                                        <field name="create_uid"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="certificates_root_menu" name="Certificate"/>
+        <menuitem id = "certificates_data_menu" name="Certificate" parent="certificates_root_menu"/>
+        <menuitem id="certificates_certificates_menu" name="Certifcate" parent="certificates_data_menu"
+                  action="certificates_action"/>
+
+        <menuitem id = "certificates_type_data_menu" name="Certificate Types" parent="certificates_root_menu"/>
+        <menuitem id="certificates_types_menu" name="Certificate Types" parent="certificates_type_data_menu"
+                  action="certificates_type_action"/>
+
+    </data>
+</odoo>
